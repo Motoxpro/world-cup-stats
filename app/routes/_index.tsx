@@ -19,15 +19,15 @@ export const meta: MetaFunction = () => {
     { name: 'description', content: 'Welcome to World Cup Stats!' },
   ];
 };
-
-export async function loader({ request }: LoaderFunctionArgs) {
-  const supabaseClient = getSupabaseServerClient(request);
-  const response = await supabaseClient.auth.getUser();
-  if (response?.data?.user) {
-    return redirect('/results');
-  }
-  return null;
-}
+//
+// export async function loader({ request }: LoaderFunctionArgs) {
+//   const supabaseClient = getSupabaseServerClient(request);
+//   const response = await supabaseClient.auth.getUser();
+//   if (response?.data?.user) {
+//     return redirect('/results');
+//   }
+//   return null;
+// }
 
 export default function Index() {
   return (
