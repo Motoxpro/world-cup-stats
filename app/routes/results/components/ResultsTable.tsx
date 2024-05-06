@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import ResultDetail from '~/routes/results/components/ResultDetail';
 import {
@@ -57,19 +57,27 @@ const activityItems = [
   // More items...
 ];
 
-const ResultsTable: React.FC = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+interface ResultsTableProps {
+  data: any;
+}
+const ResultsTable: React.FC<ResultsTableProps> = ({ data }) => {
+  const [currentRacer, setCurrentRacer] = useState<any | null>(null);
 
-  const handleRowClick = () => {
-    setSidebarOpen((prevState) => !prevState);
+  const handleRowClick = (racerId: any) => {
+    const newRider = data.find((r) => r.id === racerId);
+    setCurrentRacer(newRider);
   };
   const handleResultDetailClose = () => {
-    setSidebarOpen(false);
+    setCurrentRacer(null);
   };
 
   return (
     <div className="border-t border-white/10 pt-11">
-      <ResultDetail isOpen={sidebarOpen} onClose={handleResultDetailClose} />
+      <ResultDetail
+        isOpen={!!currentRacer}
+        currentRacer={currentRacer}
+        onClose={handleResultDetailClose}
+      />
       <h2 className="px-4 text-base font-semibold leading-7 text-white sm:px-6 lg:px-8">
         Latest results
       </h2>

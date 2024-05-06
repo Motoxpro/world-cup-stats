@@ -30,6 +30,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const supabaseClient = getSupabaseServerClient(request);
   const response = await supabaseClient.auth.getUser();
   if (!response?.data?.user) {
+    console.log('No user found. Redirecting to login.')
     return redirect('/login');
   }
   // Check to see if there are no query params. If so, redirect to the closest race
@@ -51,6 +52,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
 const Results: React.FC = () => {
   const { isVerified, raceNavigationItems } = useLoaderData<LoaderData>();
 
+  const raceData = [];
+
   // TODO: Uncomment this once the user verification is implemented
   // if (!isVerified) {
   //   return <NotVerified />;
@@ -64,7 +67,7 @@ const Results: React.FC = () => {
         <Navigation navigationItems={dayNavigationItems} type="day" />
         <RaceInfo />
       </header>
-      <ResultsTable />
+      <ResultsTable data={raceData} />
     </main>
   );
 };
