@@ -1,122 +1,155 @@
-import { Link } from "@remix-run/react";
-import { useOptionalUser } from "~/utils";
+import type { MetaFunction } from '@remix-run/cloudflare';
+import { CheckIcon } from '@heroicons/react/20/solid';
+import { Link } from '@remix-run/react';
+
+const includedFeatures = [
+  'Up to 22 sectors (dependent on track)',
+  'Instantaneous results',
+  'Split time and sector positions',
+  'Distance and speed per sector for advanced analysis',
+];
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: 'World Cup Stats V2' },
+    { name: 'description', content: 'Welcome to World Cup Stats!' },
+  ];
+};
 
 export default function Index() {
-  const user = useOptionalUser();
   return (
-    <main className="relative min-h-screen bg-white sm:flex sm:items-center sm:justify-center">
-      <div className="relative sm:pb-16 sm:pt-8">
-        <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-          <div className="relative shadow-xl sm:overflow-hidden sm:rounded-2xl">
-            <div className="absolute inset-0">
-              <img
-                className="h-full w-full object-cover"
-                src="https://user-images.githubusercontent.com/8431042/161311608-f5d43ab2-85b4-40c5-9dea-065985e5adf5.jpeg"
-                alt="BTS playing on stage with the group leaving in action poses"
-              />
-              <div className="absolute inset-0 bg-[color:rgba(139,92,246,0.5)] mix-blend-multiply" />
-            </div>
-            <div className="lg:pb-18 relative px-4 pt-16 pb-8 sm:px-6 sm:pt-24 sm:pb-14 lg:px-8 lg:pt-32">
-              <h1 className="text-center text-6xl font-extrabold tracking-tight sm:text-8xl lg:text-9xl">
-                <span className="block uppercase text-violet-500 drop-shadow-md">
-                  K-Pop Stack
-                </span>
+    <div className="bg-gray-900">
+      <header className="absolute inset-x-0 top-0 z-50">
+        <nav
+          className="flex items-center justify-between p-6 lg:px-8"
+          aria-label="Global"
+        >
+          <div className="flex lg:flex-1 justify-end">
+            <Link to="/results" className="-m-1.5 p-1.5">
+              <h4 className="text-lg font-bold text-white">LOG IN</h4>
+            </Link>
+          </div>
+        </nav>
+      </header>
+
+      <div className="relative isolate pt-14">
+        <div
+          className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+          aria-hidden="true"
+        >
+          <div
+            className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+            style={{
+              clipPath:
+                'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
+            }}
+          />
+        </div>
+        <div className="py-24 sm:py-32 lg:pb-40">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="mx-auto max-w-2xl text-center">
+              <h1
+                style={{ textShadow: '0 0 10px rgba(255,255,255,0.3)' }}
+                className="text-6xl font-bold tracking-tight text-white sm:text-6xl"
+              >
+                World Cup Stats V2
               </h1>
-              <p className="mx-auto mt-6 max-w-lg text-center text-xl text-white sm:max-w-3xl">
-                Check the README.md file for instructions on how to get this
-                project deployed.
+              <p
+                style={{ textShadow: '0 0 10px rgba(255,255,255,0.1)' }}
+                className="mt-6 text-xl leading-8 text-gray-50 font-bold"
+              >
+                Next generation analysis. More than 20 splits at every race. In
+                real time.
               </p>
-              <div className="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center">
-                {user ? (
-                  <Link
-                    to="/notes"
-                    className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-violet-700 shadow-sm hover:bg-violet-50 sm:px-8"
-                  >
-                    View Notes for {user.email}
-                  </Link>
-                ) : (
-                  <div className="space-y-4 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5 sm:space-y-0">
-                    <Link
-                      to="/join"
-                      className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-violet-700 shadow-sm hover:bg-violet-50 sm:px-8"
-                    >
-                      Sign up
-                    </Link>
-                    <Link
-                      to="/login"
-                      className="flex items-center justify-center rounded-md bg-violet-500 px-4 py-3 font-medium text-white hover:bg-violet-600  "
-                    >
-                      Log In
-                    </Link>
-                  </div>
-                )}
+            </div>
+
+            <Link to="/results">Results</Link>
+            <img
+              src="https://tailwindui.com/img/component-images/dark-project-app-screenshot.png"
+              alt="App screenshot"
+              width={2432}
+              height={1442}
+              className="mt-6 rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10 sm:mt-12"
+            />
+
+            <div className="mx-auto mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none bg-gray-700/10">
+              <div className="p-8 sm:p-10 lg:flex-auto">
+                <h3 className="text-2xl font-bold tracking-tight text-gray-50">
+                  2024 Access
+                </h3>
+                <p className="mt-6 text-base leading-7 text-gray-50">
+                  <i>
+                    Stop wasting time with only 4 splits, old pdfs and live
+                    timing
+                  </i>
+                  .<br /> Do{' '}
+                  <b>
+                    <i>real</i>
+                  </b>{' '}
+                  analysis at World Cup in real time for time training,
+                  qualifying, semi-finals and finals.
+                </p>
+                <div className="mt-10 flex items-center gap-x-4">
+                  <h4 className="flex-none text-sm font-semibold leading-6 text-sky-600">
+                    What’s included
+                  </h4>
+                  <div className="h-px flex-auto bg-gray-100" />
+                </div>
+                <ul
+                  role="list"
+                  className="mt-8 grid grid-cols-1 gap-4 text-sm leading-6 text-gray-50 sm:grid-cols-2 sm:gap-6"
+                >
+                  {includedFeatures.map((feature) => (
+                    <li key={feature} className="flex gap-x-3">
+                      <CheckIcon
+                        className="h-6 w-5 flex-none text-sky-600"
+                        aria-hidden="true"
+                      />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <a href="https://remix.run">
-                <img
-                  src="https://user-images.githubusercontent.com/1500684/158298926-e45dafff-3544-4b69-96d6-d3bcc33fc76a.svg"
-                  alt="Remix"
-                  className="mx-auto mt-16 w-full max-w-[12rem] md:max-w-[16rem]"
-                />
-              </a>
+              <div className="sm:-mt-2 p-2 lg:w-full lg:max-w-md lg:flex-shrink-0 lg:my-auto lg:mx-auto">
+                <div className="rounded-2xl bg-gray-50 py-10 text-center ring-1 ring-inset ring-gray-900/5 lg:flex lg:flex-col lg:justify-center lg:py-16">
+                  <div className="mx-auto max-w-xs px-8">
+                    <p className="text-base font-semibold text-gray-900">
+                      Pay once, <br />
+                      get access to the entire 2024 season
+                    </p>
+                    <p className="mt-6 flex items-baseline justify-center gap-x-2">
+                      <span className="text-5xl font-bold tracking-tight text-gray-900">
+                        $99
+                      </span>
+                      <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600">
+                        USD
+                      </span>
+                    </p>
+                    <a
+                      href="#"
+                      className="mt-10 block w-full rounded-md bg-sky-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
+                    >
+                      Get access
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-
-        <div className="mx-auto max-w-7xl py-2 px-4 sm:px-6 lg:px-8">
-          <div className="mt-6 flex flex-wrap justify-center gap-8">
-            {[
-              {
-                src: "https://user-images.githubusercontent.com/43764894/223575102-b784690b-19a6-4e7a-b72c-8ac42c736a71.png",
-                alt: "Netlify",
-                href: "https://netlify.com",
-              },
-              {
-                src: "https://user-images.githubusercontent.com/8431042/158711352-746c52cf-433e-4823-987a-c9d6f4349ce7.svg",
-                alt: "Supabase",
-                href: "https://supabase.com",
-              },
-              {
-                src: "https://user-images.githubusercontent.com/1500684/157764276-a516a239-e377-4a20-b44a-0ac7b65c8c14.svg",
-                alt: "Tailwind",
-                href: "https://tailwindcss.com",
-              },
-              {
-                src: "https://user-images.githubusercontent.com/1500684/157764454-48ac8c71-a2a9-4b5e-b19c-edef8b8953d6.svg",
-                alt: "Cypress",
-                href: "https://www.cypress.io",
-              },
-              {
-                src: "https://user-images.githubusercontent.com/1500684/157772662-92b0dd3a-453f-4d18-b8be-9fa6efde52cf.png",
-                alt: "Testing Library",
-                href: "https://testing-library.com",
-              },
-              {
-                src: "https://user-images.githubusercontent.com/1500684/157772934-ce0a943d-e9d0-40f8-97f3-f464c0811643.svg",
-                alt: "Prettier",
-                href: "https://prettier.io",
-              },
-              {
-                src: "https://user-images.githubusercontent.com/1500684/157772990-3968ff7c-b551-4c55-a25c-046a32709a8e.svg",
-                alt: "ESLint",
-                href: "https://eslint.org",
-              },
-              {
-                src: "https://user-images.githubusercontent.com/1500684/157773063-20a0ed64-b9f8-4e0b-9d1e-0b65a3d4a6db.svg",
-                alt: "TypeScript",
-                href: "https://typescriptlang.org",
-              },
-            ].map((img) => (
-              <a
-                key={img.href}
-                href={img.href}
-                className="flex h-16 w-32 justify-center p-1 grayscale transition hover:grayscale-0 focus:grayscale-0"
-              >
-                <img alt={img.alt} src={img.src} />
-              </a>
-            ))}
-          </div>
+        <div
+          className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
+          aria-hidden="true"
+        >
+          <div
+            className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-20 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+            style={{
+              clipPath:
+                'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
+            }}
+          />
         </div>
       </div>
-    </main>
+    </div>
   );
 }
