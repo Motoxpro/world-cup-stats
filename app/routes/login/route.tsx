@@ -25,7 +25,7 @@ const Login: React.FC = () => {
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <ChartBarIcon className="mx-auto h-10 w-auto text-sky-500" />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white">
-            Sign in to your account
+            Sign in or Create an account
           </h2>
         </div>
         {didSubmit ? (

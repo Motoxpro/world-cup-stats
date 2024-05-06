@@ -63,11 +63,11 @@ export default function App() {
         <Scripts />
         <LiveReload />
         <EnvProvider env={data.env}>
-          {/*  <SupabaseProvider> */}
-          {/*    <AuthProvider> */}
-          <Outlet />
-          {/* </AuthProvider> */}
-          {/* </SupabaseProvider> */}
+          <SupabaseProvider>
+            {/*    <AuthProvider> */}
+            <Outlet />
+            {/* </AuthProvider> */}
+          </SupabaseProvider>
         </EnvProvider>
       </body>
     </html>
