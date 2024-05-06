@@ -1,6 +1,6 @@
-import type { MetaFunction } from '@remix-run/cloudflare';
 import { CheckIcon } from '@heroicons/react/20/solid';
 import { Link } from '@remix-run/react';
+import { MetaFunction } from '@remix-run/node';
 
 const includedFeatures = [
   'Up to 22 sectors (dependent on track)',
@@ -20,10 +20,7 @@ export default function Index() {
   return (
     <div className="bg-gray-900">
       <header className="absolute inset-x-0 top-0 z-50">
-        <nav
-          className="flex items-center justify-between p-6 lg:px-8"
-          aria-label="Global"
-        >
+        <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
           <div className="flex lg:flex-1 justify-end">
             <Link to="/results" className="-m-1.5 p-1.5">
               <h4 className="text-lg font-bold text-white">LOG IN</h4>
@@ -58,8 +55,7 @@ export default function Index() {
                 style={{ textShadow: '0 0 10px rgba(255,255,255,0.1)' }}
                 className="mt-6 text-xl leading-8 text-gray-50 font-bold"
               >
-                Next generation analysis. More than 20 splits at every race. In
-                real time.
+                Next generation analysis. More than 20 splits at every race. In real time.
               </p>
             </div>
 
@@ -74,20 +70,15 @@ export default function Index() {
 
             <div className="mx-auto mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none bg-gray-700/10">
               <div className="p-8 sm:p-10 lg:flex-auto">
-                <h3 className="text-2xl font-bold tracking-tight text-gray-50">
-                  2024 Access
-                </h3>
+                <h3 className="text-2xl font-bold tracking-tight text-gray-50">2024 Access</h3>
                 <p className="mt-6 text-base leading-7 text-gray-50">
-                  <i>
-                    Stop wasting time with only 4 splits, old pdfs and live
-                    timing
-                  </i>
+                  <i>Stop wasting time with only 4 splits, old pdfs and live timing</i>
                   .<br /> Do{' '}
                   <b>
                     <i>real</i>
                   </b>{' '}
-                  analysis at World Cup in real time for time training,
-                  qualifying, semi-finals and finals.
+                  analysis at World Cup in real time for time training, qualifying, semi-finals and
+                  finals.
                 </p>
                 <div className="mt-10 flex items-center gap-x-4">
                   <h4 className="flex-none text-sm font-semibold leading-6 text-sky-600">
@@ -101,10 +92,7 @@ export default function Index() {
                 >
                   {includedFeatures.map((feature) => (
                     <li key={feature} className="flex gap-x-3">
-                      <CheckIcon
-                        className="h-6 w-5 flex-none text-sky-600"
-                        aria-hidden="true"
-                      />
+                      <CheckIcon className="h-6 w-5 flex-none text-sky-600" aria-hidden="true" />
                       {feature}
                     </li>
                   ))}
@@ -118,9 +106,7 @@ export default function Index() {
                       get access to the entire 2024 season
                     </p>
                     <p className="mt-6 flex items-baseline justify-center gap-x-2">
-                      <span className="text-5xl font-bold tracking-tight text-gray-900">
-                        $99
-                      </span>
+                      <span className="text-5xl font-bold tracking-tight text-gray-900">$99</span>
                       <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600">
                         USD
                       </span>

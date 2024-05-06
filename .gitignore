@@ -12,3 +12,12 @@ cypress/videos/
 
 build
 .idea/encodings.xml
+.idea/world-cup-stats.iml
+.idea/vcs.xml
+.idea/prettier.xml
+.idea/modules.xml
+.idea/misc.xml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/inspectionProfiles/profiles_settings.xml
+.idea/codeStyles/Project.xml
+.idea/codeStyles/codeStyleConfig.xml

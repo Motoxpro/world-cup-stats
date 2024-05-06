@@ -11,9 +11,11 @@ import { createUserSession, getUserId } from "~/session.server";
 import { validateEmail } from "~/utils";
 
 export const meta: MetaFunction = () => {
-  return [{
-    title: "Login",
-  }];
+  return [
+    {
+      title: "Login",
+    },
+  ];
 };
 
 interface ActionData {
@@ -43,14 +45,14 @@ export const action: ActionFunction = async ({ request }) => {
   if (typeof password !== "string") {
     return json(
       { errors: { password: "Valid password is required." } },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
   if (password.length < 6) {
     return json(
       { errors: { password: "Password is too short" } },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -59,14 +61,14 @@ export const action: ActionFunction = async ({ request }) => {
   if (!user) {
     return json(
       { errors: { email: "Invalid email or password" } },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
   return createUserSession({
     request,
     userId: user.id,
-    remember: remember === "on" ? true : false,
+    remember: remember === 'on',
     redirectTo: typeof redirectTo === "string" ? redirectTo : "/notes",
   });
 };
