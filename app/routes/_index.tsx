@@ -1,6 +1,10 @@
 import { CheckIcon } from '@heroicons/react/20/solid';
 import { Link } from '@remix-run/react';
-import { MetaFunction } from '@remix-run/node';
+import { json, type LoaderFunctionArgs, MetaFunction, redirect } from '@remix-run/node';
+import Header from '~/components/Header';
+import { requireUserId } from '~/session.server';
+import { getNoteListItems } from '~/models/note.server';
+import { getSupabaseServerClient } from '~/lib/supabase/supabaseClient';
 
 const includedFeatures = [
   'Up to 22 sectors (dependent on track)',
@@ -16,18 +20,19 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+export async function loader({ request }: LoaderFunctionArgs) {
+  const supabaseClient = getSupabaseServerClient(request);
+  const user = await supabaseClient.auth.getUser();
+  if (user) {
+    return redirect('/results');
+  }
+  return null;
+}
+
 export default function Index() {
   return (
     <div className="bg-gray-900">
-      <header className="absolute inset-x-0 top-0 z-50">
-        <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
-          <div className="flex lg:flex-1 justify-end">
-            <Link to="/results" className="-m-1.5 p-1.5">
-              <h4 className="text-lg font-bold text-white">LOG IN</h4>
-            </Link>
-          </div>
-        </nav>
-      </header>
+      <Header />
 
       <div className="relative isolate pt-14">
         <div

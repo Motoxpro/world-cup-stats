@@ -1,6 +1,6 @@
 import React, { createContext, ReactNode, useContext } from 'react';
 import { ReactFCC } from '~/lib/types/type-utils';
-import { AppEnv } from '../../server';
+import { AppEnv } from '~/lib/zodSchema';
 
 const EnvContext = createContext<AppEnv>({} as AppEnv);
 

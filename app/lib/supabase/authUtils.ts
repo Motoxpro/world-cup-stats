@@ -1,6 +1,11 @@
 import type { LoaderFunctionArgs } from '@remix-run/cloudflare';
 import { redirect } from '@remix-run/router';
 import { getSupabaseServerClient } from '~/lib/supabase/supabaseClient';
+import { User } from '@supabase/supabase-js';
+
+export const isUserVerified = (user: User): boolean => {
+  return !!user.user_metadata.isVerified;
+};
 
 export async function requireAuth(
   request: Request,

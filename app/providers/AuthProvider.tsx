@@ -1,13 +1,11 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-import type { Provider } from '@supabase/gotrue-js';
-import { useSupabaseBrowser } from '~/lib/supabase/supabaseClient';
-import { AuthProviderEnum } from '~/lib/const';
+import { useSupabase } from '~/providers/SupabaseProvider';
+import { User } from '@supabase/supabase-js';
 
 interface AuthContextProps {
   isSignedIn: boolean;
-  hasCompletedOnboarding: boolean;
-  signInUser: (authTokenProvider: AuthProviderEnum) => Promise<void>;
+  signInUser: (email: string) => Promise<void>;
   signOutUser: () => Promise<void>;
   isInitialized: boolean;
   isAuthLoading: boolean;
@@ -25,32 +23,19 @@ export default function AuthProvider({
 }: {
   children: React.ReactNode;
 }): React.ReactElement {
-  const supabaseClient = useSupabaseBrowser();
-  // const { identify } = useAnalytics();
-  // const { refetch: refetchUser } = useUserQuery();
-  // const { refetch: refetchPublicProfile } = usePublicProfileQuery();
-  // const { trackUserSignInSuccess, trackUserSignOutSuccess, trackUserSignUpSuccess } =
-  //   useSegmentTrack();
-
+  const { supabase } = useSupabase();
   const [isSignedIn, setIsSignedIn] = useState(false);
-  const [hasCompletedOnboarding, setHasCompletedOnboarding] = useState(false);
   const [isAuthLoading, setIsAuthLoading] = useState(false);
-  const [isInitialized, setIsInitialized] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const {
       data: { subscription },
-    } = supabaseClient.auth.onAuthStateChange((event, session) => {
-      // identify(session?.user?.id, {
-      //   GrowSource: 'pumptrack-app',
-      //   email: session?.user?.email,
-      //   name: session?.user?.user_metadata?.name,
-      // }).then();
-      console.log('event', event);
-      console.log('session', session);
-      setHasCompletedOnboarding(session?.user?.user_metadata?.hasCompletedOnboarding);
+    } = supabase.auth.onAuthStateChange((event, session) => {
       setIsSignedIn(!!session);
-      setIsInitialized(true);
+      if (session) {
+        setUser(session.user);
+      }
     });
 
     return () => {
@@ -59,110 +44,16 @@ export default function AuthProvider({
   }, []);
 
   /**
-   * Save token to storage and set auth state.
+   * Sign in the user.
    */
-  const signInUserWithOAuth = async (authTokenProvider: Provider): Promise<void> => {
-    if (!authTokenProvider) {
-      throw new Error('No token or auth provider provided');
-    }
+  const signInUserWithMagicLink = async (email: string): Promise<void> => {
     setIsAuthLoading(true);
-    // Sign in with credentials
-    const { data, error: authError } = await supabaseClient.auth.signInWithOAuth({
-      provider: authTokenProvider,
-      // options: {
-      // // Client side redirect. Where do we want to go when we get back to the app?
-      // redirectTo: `${process.env.APP_URL}/larry`,
-      // },
-    });
-    console.log(authError);
-    const authTokenResponse = data;
-    console.log('authTokenResponse', authTokenResponse);
-    // console.log('authTokenResponse', authTokenResponse);
-    // const user = authTokenResponse?.user;
-    // if (authError || !user) {
-    //   setIsAuthLoading(false);
-    //   throw new Error(`Error signing in: ${authError?.message}`);
-    // }
-
-    // refetchUser().then();
-    // refetchPublicProfile().then();
-    // trackUserSignInSuccess();
-    // Track first time sign in
-    // if (!user.user_metadata?.hasCompletedOnboarding) {
-    //   trackUserSignUpSuccess();
-    // }
-    setIsAuthLoading(false);
-  };
-
-  // const signInUser = async (
-  //   authTokenProvider: AuthProviderEnum,
-  //   usernamePassword: { email: string; password: string },
-  // ): Promise<void> => {
-  //   if (!authTokenProvider) {
-  //     throw new Error('No token or auth provider provided');
-  //   }
-  //   setIsAuthLoading(true);
-  //   let authTokenResponse;
-  //   // Sign in with credentials
-  //   if (authTokenProvider === AuthProviderEnum.Email) {
-  //     const { data, error: authError } = await supabaseClient.auth.signInWithPassword({
-  //       email,
-  //       password,
-  //     });
-  //     console.log(authError);
-  //     authTokenResponse = data;
-  //   } else {
-  //     const { data, error: authError } = await supabaseClient.auth.signInWithOAuth({
-  //       provider: authTokenProvider,
-  //     });
-  //     console.log(authError);
-  //     authTokenResponse = data;
-  //   }
-  //   console.log('authTokenResponse', authTokenResponse);
-  //   const user = authTokenResponse?.user;
-  //   if (authError || !user) {
-  //     setIsAuthLoading(false);
-  //     throw new Error(`Error signing in: ${authError?.message}`);
-  //   }
-  //
-  //   // refetchUser().then();
-  //   // refetchPublicProfile().then();
-  //   // trackUserSignInSuccess();
-  //   // Track first time sign in
-  //   // if (!user.user_metadata?.hasCompletedOnboarding) {
-  //   //   trackUserSignUpSuccess();
-  //   // }
-  //   setIsAuthLoading(false);
-  // };
-
-  /**
-   * Sign up the user.
-   */
-  const signUpUser = async (email: string, password: string): Promise<void> => {
-    setIsAuthLoading(true);
-    // Sign in with credentials
-    const { data: authTokenResponse, error: authError } = await supabaseClient.auth.signUp({
+    await supabase.auth.signInWithOtp({
       email,
-      password,
-      // options: {
-      //   emailRedirectTo: `${env.APP_URL}/auth/verify-email`,
-      // },
+      options: {
+        emailRedirectTo: 'https://worldcupstats.eliotjackson.com/results',
+      },
     });
-    console.log(authError);
-    // console.log('authTokenResponse', authTokenResponse);
-    const user = authTokenResponse?.user;
-    if (authError || !user) {
-      setIsAuthLoading(false);
-      throw new Error(`Error signing in: ${authError?.message}`);
-    }
-
-    // refetchUser().then();
-    // refetchPublicProfile().then();
-    // trackUserSignInSuccess();
-    // Track first time sign in
-    // if (!user.user_metadata?.hasCompletedOnboarding) {
-    //   trackUserSignUpSuccess();
-    // }
     setIsAuthLoading(false);
   };
 
@@ -170,21 +61,19 @@ export default function AuthProvider({
    * Log out the user.
    */
   const signOutUser = async (): Promise<void> => {
-    await supabaseClient.auth.signOut();
+    await supabase.auth.signOut();
     // trackUserSignOutSuccess();
   };
 
   const auth = {
     isSignedIn,
-    signUpUser,
-    signInUserWithOAuth,
+    signInUser: signInUserWithMagicLink,
     signOutUser,
-    isInitialized,
-    hasCompletedOnboarding,
+    user,
     isAuthLoading,
   };
 
-  if (!isInitialized) {
+  if (!user) {
     return <></>;
   }
 
