@@ -1,10 +1,8 @@
 import { CheckIcon } from '@heroicons/react/20/solid';
 import { Link } from '@remix-run/react';
-import { json, type LoaderFunctionArgs, MetaFunction, redirect } from '@remix-run/node';
+import { type LoaderFunctionArgs, MetaFunction, redirect } from '@remix-run/node';
 import Header from '~/components/Header';
-// import { requireUserId } from '~/session.server';
-// import { getNoteListItems } from '~/models/note.server';
-// import { getSupabaseServerClient } from '~/lib/supabase/supabaseClient';
+import { getSupabaseServerClient } from '~/lib/supabase/supabaseClient';
 
 const includedFeatures = [
   'Up to 22 sectors (dependent on track)',
@@ -19,15 +17,15 @@ export const meta: MetaFunction = () => {
     { name: 'description', content: 'Welcome to World Cup Stats!' },
   ];
 };
-//
-// export async function loader({ request }: LoaderFunctionArgs) {
-//   const supabaseClient = getSupabaseServerClient(request);
-//   const response = await supabaseClient.auth.getUser();
-//   if (response?.data?.user) {
-//     return redirect('/results');
-//   }
-//   return null;
-// }
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  const supabaseClient = getSupabaseServerClient(request);
+  const response = await supabaseClient.auth.getUser();
+  if (response?.data?.user) {
+    return redirect('/results');
+  }
+  return null;
+}
 
 export default function Index() {
   return (

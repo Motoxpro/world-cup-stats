@@ -64,9 +64,9 @@ export default function App() {
         <LiveReload />
         <EnvProvider env={data.env}>
           <SupabaseProvider>
-            {/*    <AuthProvider> */}
-            <Outlet />
-            {/* </AuthProvider> */}
+            <AuthProvider>
+              <Outlet />
+            </AuthProvider>
           </SupabaseProvider>
         </EnvProvider>
       </body>

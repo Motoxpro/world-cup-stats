@@ -73,9 +73,5 @@ export default function AuthProvider({
     isAuthLoading,
   };
 
-  if (!user) {
-    return <></>;
-  }
-
   return <authContext.Provider value={auth}>{children}</authContext.Provider>;
 }

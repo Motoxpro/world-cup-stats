@@ -30,7 +30,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const supabaseClient = getSupabaseServerClient(request);
   const response = await supabaseClient.auth.getUser();
   if (!response?.data?.user) {
-    console.log('No user found. Redirecting to login.')
     return redirect('/login');
   }
   // Check to see if there are no query params. If so, redirect to the closest race
