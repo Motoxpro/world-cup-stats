@@ -2,9 +2,9 @@ import { CheckIcon } from '@heroicons/react/20/solid';
 import { Link } from '@remix-run/react';
 import { json, type LoaderFunctionArgs, MetaFunction, redirect } from '@remix-run/node';
 import Header from '~/components/Header';
-import { requireUserId } from '~/session.server';
-import { getNoteListItems } from '~/models/note.server';
-import { getSupabaseServerClient } from '~/lib/supabase/supabaseClient';
+// import { requireUserId } from '~/session.server';
+// import { getNoteListItems } from '~/models/note.server';
+// import { getSupabaseServerClient } from '~/lib/supabase/supabaseClient';
 
 const includedFeatures = [
   'Up to 22 sectors (dependent on track)',
