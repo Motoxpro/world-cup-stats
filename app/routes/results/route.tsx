@@ -1,14 +1,13 @@
 import ResultsTable from '~/routes/results/components/ResultsTable';
-import Navigation from '~/routes/results/components/Navigation';
+import Navigation, { NavigationItem } from '~/routes/results/components/Navigation';
 import RaceInfo from '~/routes/results/components/RaceInfo';
 import { redirect } from '@remix-run/router';
-import { useAuth } from '~/providers/AuthProvider';
 import type { LoaderFunctionArgs } from '@remix-run/node';
 import { getSupabaseServerClient } from '~/lib/supabase/supabaseClient';
 import { useLoaderData } from '@remix-run/react';
 import NotVerified from '~/routes/results/NotVerified';
+import React from 'react';
 
-const raceNavigationItems = [{ label: 'Fort William', id: 'fort-william' }];
 const categoryNavigationItems = [
   { label: 'Women Elite', id: 'women-elite' },
   { label: 'Men Elite', id: 'men-elite' },
@@ -24,6 +23,7 @@ const dayNavigationItems = [
 
 type LoaderData = {
   isVerified: boolean;
+  raceNavigationItems: NavigationItem[];
 };
 
 export async function loader({ request }: LoaderFunctionArgs) {
@@ -32,15 +32,30 @@ export async function loader({ request }: LoaderFunctionArgs) {
   if (!response?.data?.user) {
     return redirect('/login');
   }
-  return { isVerified: response.data.user?.user_metadata.isVerified };
+  // Check to see if there are no query params. If so, redirect to the closest race
+  const closestRace = 'fort-william';
+  if (!request.url.includes('?')) {
+    return redirect(`/results?race=${closestRace}&category=women-elite&day=timed-training`);
+  }
+  return {
+    isVerified: response.data.user?.user_metadata.isVerified,
+    raceNavigationItems: [
+      {
+        id: 'fort-william',
+        label: 'Fort William',
+      },
+    ],
+  };
 }
 
 const Results: React.FC = () => {
-  const { isVerified } = useLoaderData<LoaderData>();
+  const { isVerified, raceNavigationItems } = useLoaderData<LoaderData>();
 
-  if (!isVerified) {
-    return <NotVerified />;
-  }
+  // TODO: Uncomment this once the user verification is implemented
+  // if (!isVerified) {
+  //   return <NotVerified />;
+  // }
+
   return (
     <main>
       <header>

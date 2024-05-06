@@ -1,8 +1,8 @@
 import { useSearchParams } from '@remix-run/react';
 import React, { MouseEvent } from 'react';
 
-type NavigationItem = { id: string; label: string };
-type NavigationType = 'race' | 'category' | 'day';
+export type NavigationItem = { id: string; label: string };
+export type NavigationType = 'race' | 'category' | 'day';
 interface NavigationProps {
   navigationItems: NavigationItem[];
   type: NavigationType;
@@ -18,7 +18,7 @@ const Navigation: React.FC<NavigationProps> = ({ navigationItems, type }) => {
     newSearchParams.set(type, item.id);
     setSearchParams(newSearchParams);
   };
-
+console.log('Navigation.tsx: raceNavigationItems', navigationItems)
   return (
     <nav className="flex overflow-x-auto border-b border-white/10 py-4">
       <ul
