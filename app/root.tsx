@@ -62,13 +62,13 @@ export default function App() {
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
-        {/*<EnvProvider env={data.env}>*/}
-        {/*  <SupabaseProvider>*/}
-        {/*    <AuthProvider>*/}
-              <Outlet />
-            {/*</AuthProvider>*/}
-          {/*</SupabaseProvider>*/}
-        {/*</EnvProvider>*/}
+        <EnvProvider env={data.env}>
+          {/*  <SupabaseProvider> */}
+          {/*    <AuthProvider> */}
+          <Outlet />
+          {/* </AuthProvider> */}
+          {/* </SupabaseProvider> */}
+        </EnvProvider>
       </body>
     </html>
   );

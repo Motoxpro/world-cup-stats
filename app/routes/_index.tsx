@@ -77,12 +77,12 @@ export default function Index() {
               <div className="p-8 sm:p-10 lg:flex-auto">
                 <h3 className="text-2xl font-bold tracking-tight text-gray-50">2024 Access</h3>
                 <p className="mt-6 text-base leading-7 text-gray-50">
-                  <i>Stop wasting time with only 4 splits, old pdfs and live timing</i>
+                  <i>Stop wasting time with only 4 splits, old pdfs and slow live timing</i>
                   .<br /> Do{' '}
                   <b>
                     <i>real</i>
                   </b>{' '}
-                  analysis at World Cup in real time for time training, qualifying, semi-finals and
+                  analysis at World Cups in real time for time training, qualifying, semi-finals and
                   finals.
                 </p>
                 <div className="mt-10 flex items-center gap-x-4">

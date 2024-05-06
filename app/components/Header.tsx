@@ -17,7 +17,7 @@ const Header: React.FC<HeaderProps> = ({ hideLogin }) => {
         {!hideLogin && (
           <div className="flex lg:flex-1 justify-end">
             <Link to="/login" className="-m-1.5 p-1.5">
-              <h4 className="text-lg font-bold text-white">LOG IN</h4>
+              <h4 className="text-md font-bold text-white">SIGN IN</h4>
             </Link>
           </div>
         )}
