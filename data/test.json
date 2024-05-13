@@ -1,0 +1,626 @@
+[
+  {
+    'name': 'Loris Vergier',
+    'sector': 3,
+    'time': 46259,
+    'distance': 477
+  },
+  {
+    'name': 'Loris Vergier',
+    'sector': 4,
+    'time': 70056,
+    'distance': 584
+  },
+  {
+    'name': 'Loris Vergier',
+    'sector': 5,
+    'time': 105559,
+    'distance': 874
+  },
+  {
+    'name': 'Loris Vergier',
+    'sector': 6,
+    'time': 120922,
+    'distance': 1215
+  },
+  {
+    'name': 'Loris Vergier',
+    'sector': 7,
+    'time': 153265,
+    'distance': 1629
+  },
+  {
+    'name': 'Loris Vergier',
+    'sector': 8,
+    'time': 177738,
+    'distance': 1767
+  },
+  {
+    'name': 'Loris Vergier',
+    'sector': 9,
+    'time': 192690,
+    'distance': 1939
+  },
+  {
+    'name': 'Loris Vergier',
+    'sector': 10,
+    'time': 201177,
+    'distance': 2149
+  },
+  {
+    'name': 'Loris Vergier',
+    'sector': 12,
+    'time': 214706,
+    'distance': 2409
+  },
+  {
+    'name': 'Loris Vergier',
+    'sector': 13,
+    'time': 218738,
+    'distance': 2464
+  },
+  {
+    'name': 'Loris Vergier',
+    'sector': 14,
+    'time': 221701,
+    'distance': 2488
+  },
+  {
+    'name': 'Loris Vergier',
+    'sector': 16,
+    'time': 236870,
+    'distance': 2694
+  },
+  {
+    'name': 'Loris Vergier',
+    'sector': 18,
+    'time': 241318,
+    'distance': 2838
+  },
+  {
+    'name': 'Loris Vergier',
+    'sector': 19,
+    'time': 246269,
+    'distance': 2914
+  },
+  {
+    'name': 'Loris Vergier',
+    'sector': 20,
+    'time': 249404,
+    'distance': 2929
+  },
+  {
+    'name': 'Andreas Kolb',
+    'sector': 3,
+    'time': 36754,
+    'distance': 477
+  },
+  {
+    'name': 'Andreas Kolb',
+    'sector': 4,
+    'time': 48664,
+    'distance': 584
+  },
+  {
+    'name': 'Andreas Kolb',
+    'sector': 5,
+    'time': 93117,
+    'distance': 874
+  },
+  {
+    'name': 'Bernard Kerr',
+    'sector': 3,
+    'time': 34389,
+    'distance': 477
+  },
+  {
+    'name': 'Bernard Kerr',
+    'sector': 4,
+    'time': 73347,
+    'distance': 584
+  },
+  {
+    'name': 'Bernard Kerr',
+    'sector': 5,
+    'time': 97624,
+    'distance': 874
+  },
+  {
+    'name': 'Bernard Kerr',
+    'sector': 6,
+    'time': 119706,
+    'distance': 1215
+  },
+  {
+    'name': 'Bernard Kerr',
+    'sector': 7,
+    'time': 156316,
+    'distance': 1629
+  },
+  {
+    'name': 'Bernard Kerr',
+    'sector': 8,
+    'time': 173057,
+    'distance': 1767
+  },
+  {
+    'name': 'Bernard Kerr',
+    'sector': 9,
+    'time': 189737,
+    'distance': 1939
+  },
+  {
+    'name': 'Bernard Kerr',
+    'sector': 10,
+    'time': 210890,
+    'distance': 2149
+  },
+  {
+    'name': 'Bernard Kerr',
+    'sector': 12,
+    'time': 219841,
+    'distance': 2409
+  },
+  {
+    'name': 'Bernard Kerr',
+    'sector': 13,
+    'time': 221140,
+    'distance': 2464
+  },
+  {
+    'name': 'Bernard Kerr',
+    'sector': 14,
+    'time': 224166,
+    'distance': 2488
+  },
+  {
+    'name': 'Bernard Kerr',
+    'sector': 15,
+    'time': 231944,
+    'distance': 2554
+  },
+  {
+    'name': 'Bernard Kerr',
+    'sector': 16,
+    'time': 235832,
+    'distance': 2694
+  },
+  {
+    'name': 'Bernard Kerr',
+    'sector': 18,
+    'time': 244633,
+    'distance': 2838
+  },
+  {
+    'name': 'Bernard Kerr',
+    'sector': 20,
+    'time': 250133,
+    'distance': 2929
+  },
+  {
+    'name': 'Dakotah Norton',
+    'sector': 3,
+    'time': 42272,
+    'distance': 477
+  },
+  {
+    'name': 'Dakotah Norton',
+    'sector': 4,
+    'time': 49699,
+    'distance': 584
+  },
+  {
+    'name': 'Dakotah Norton',
+    'sector': 5,
+    'time': 113109,
+    'distance': 874
+  },
+  {
+    'name': 'Dakotah Norton',
+    'sector': 6,
+    'time': 145894,
+    'distance': 1215
+  },
+  {
+    'name': 'Dakotah Norton',
+    'sector': 7,
+    'time': 151616,
+    'distance': 1629
+  },
+  {
+    'name': 'Dakotah Norton',
+    'sector': 8,
+    'time': 163191,
+    'distance': 1767
+  },
+  {
+    'name': 'Dakotah Norton',
+    'sector': 9,
+    'time': 191723,
+    'distance': 1939
+  },
+  {
+    'name': 'Dakotah Norton',
+    'sector': 10,
+    'time': 201906,
+    'distance': 2149
+  },
+  {
+    'name': 'Dakotah Norton',
+    'sector': 12,
+    'time': 215708,
+    'distance': 2409
+  },
+  {
+    'name': 'Dakotah Norton',
+    'sector': 13,
+    'time': 217568,
+    'distance': 2464
+  },
+  {
+    'name': 'Dakotah Norton',
+    'sector': 14,
+    'time': 220055,
+    'distance': 2488
+  },
+  {
+    'name': 'Dakotah Norton',
+    'sector': 15,
+    'time': 226418,
+    'distance': 2554
+  },
+  {
+    'name': 'Dakotah Norton',
+    'sector': 16,
+    'time': 232778,
+    'distance': 2694
+  },
+  {
+    'name': 'Dakotah Norton',
+    'sector': 18,
+    'time': 242380,
+    'distance': 2838
+  },
+  {
+    'name': 'Matt Walker',
+    'sector': 6,
+    'time': 124341,
+    'distance': 1215
+  },
+  {
+    'name': 'Matt Walker',
+    'sector': 7,
+    'time': 156633,
+    'distance': 1629
+  },
+  {
+    'name': 'Matt Walker',
+    'sector': 8,
+    'time': 171423,
+    'distance': 1767
+  },
+  {
+    'name': 'Matt Walker',
+    'sector': 9,
+    'time': 192684,
+    'distance': 1939
+  },
+  {
+    'name': 'Matt Walker',
+    'sector': 10,
+    'time': 211732,
+    'distance': 2149
+  },
+  {
+    'name': 'Matt Walker',
+    'sector': 12,
+    'time': 217665,
+    'distance': 2409
+  },
+  {
+    'name': 'Matt Walker',
+    'sector': 13,
+    'time': 220282,
+    'distance': 2464
+  },
+  {
+    'name': 'Matt Walker',
+    'sector': 14,
+    'time': 223544,
+    'distance': 2488
+  },
+  {
+    'name': 'Matt Walker',
+    'sector': 15,
+    'time': 227823,
+    'distance': 2554
+  },
+  {
+    'name': 'Matt Walker',
+    'sector': 18,
+    'time': 243081,
+    'distance': 2838
+  },
+  {
+    'name': 'Matt Walker',
+    'sector': 20,
+    'time': 248059,
+    'distance': 2929
+  },
+  {
+    'name': 'Danny Hart',
+    'sector': 3,
+    'time': 45896,
+    'distance': 477
+  },
+  {
+    'name': 'Danny Hart',
+    'sector': 4,
+    'time': 51394,
+    'distance': 584
+  },
+  {
+    'name': 'Danny Hart',
+    'sector': 5,
+    'time': 87171,
+    'distance': 874
+  },
+  {
+    'name': 'Danny Hart',
+    'sector': 6,
+    'time': 117827,
+    'distance': 1215
+  },
+  {
+    'name': 'Danny Hart',
+    'sector': 7,
+    'time': 156983,
+    'distance': 1629
+  },
+  {
+    'name': 'Danny Hart',
+    'sector': 8,
+    'time': 170846,
+    'distance': 1767
+  },
+  {
+    'name': 'Danny Hart',
+    'sector': 9,
+    'time': 194524,
+    'distance': 1939
+  },
+  {
+    'name': 'Danny Hart',
+    'sector': 10,
+    'time': 198405,
+    'distance': 2149
+  },
+  {
+    'name': 'Danny Hart',
+    'sector': 14,
+    'time': 224952,
+    'distance': 2488
+  },
+  {
+    'name': 'Danny Hart',
+    'sector': 15,
+    'time': 227692,
+    'distance': 2554
+  },
+  {
+    'name': 'Danny Hart',
+    'sector': 16,
+    'time': 234890,
+    'distance': 2694
+  },
+  {
+    'name': 'Danny Hart',
+    'sector': 18,
+    'time': 245551,
+    'distance': 2838
+  },
+  {
+    'name': 'Dylan Maples',
+    'sector': 3,
+    'time': 45614,
+    'distance': 477
+  },
+  {
+    'name': 'Dylan Maples',
+    'sector': 4,
+    'time': 79653,
+    'distance': 584
+  },
+  {
+    'name': 'Dylan Maples',
+    'sector': 5,
+    'time': 97815,
+    'distance': 874
+  },
+  {
+    'name': 'Dylan Maples',
+    'sector': 6,
+    'time': 154125,
+    'distance': 1215
+  },
+  {
+    'name': 'Dylan Maples',
+    'sector': 7,
+    'time': 159737,
+    'distance': 1629
+  },
+  {
+    'name': 'Dylan Maples',
+    'sector': 8,
+    'time': 175799,
+    'distance': 1767
+  },
+  {
+    'name': 'Dylan Maples',
+    'sector': 9,
+    'time': 204173,
+    'distance': 1939
+  },
+  {
+    'name': 'Dylan Maples',
+    'sector': 10,
+    'time': 213578,
+    'distance': 2149
+  },
+  {
+    'name': 'Dylan Maples',
+    'sector': 12,
+    'time': 224236,
+    'distance': 2409
+  },
+  {
+    'name': 'Dylan Maples',
+    'sector': 13,
+    'time': 229017,
+    'distance': 2464
+  },
+  {
+    'name': 'Dylan Maples',
+    'sector': 14,
+    'time': 233424,
+    'distance': 2488
+  },
+  {
+    'name': 'Dylan Maples',
+    'sector': 16,
+    'time': 244509,
+    'distance': 2694
+  },
+  {
+    'name': 'Dylan Maples',
+    'sector': 18,
+    'time': 249367,
+    'distance': 2838
+  },
+  {
+    'name': 'Dylan Maples',
+    'sector': 20,
+    'time': 258695,
+    'distance': 2929
+  },
+  {
+    'name': 'Austin Dooley',
+    'sector': 3,
+    'time': 42422,
+    'distance': 477
+  },
+  {
+    'name': 'Austin Dooley',
+    'sector': 4,
+    'time': 55846,
+    'distance': 584
+  },
+  {
+    'name': 'Austin Dooley',
+    'sector': 5,
+    'time': 95676,
+    'distance': 874
+  },
+  {
+    'name': 'Austin Dooley',
+    'sector': 6,
+    'time': 151546,
+    'distance': 1215
+  },
+  {
+    'name': 'Austin Dooley',
+    'sector': 7,
+    'time': 170779,
+    'distance': 1629
+  },
+  {
+    'name': 'Austin Dooley',
+    'sector': 8,
+    'time': 217342,
+    'distance': 1767
+  },
+  {
+    'name': 'Austin Dooley',
+    'sector': 9,
+    'time': 297247,
+    'distance': 1939
+  },
+  {
+    'name': 'Austin Dooley',
+    'sector': 10,
+    'time': 392530,
+    'distance': 2149
+  },
+  {
+    'name': 'Greg Williamson',
+    'sector': 3,
+    'time': 44353,
+    'distance': 477
+  },
+  {
+    'name': 'Greg Williamson',
+    'sector': 4,
+    'time': 64246,
+    'distance': 584
+  },
+  {
+    'name': 'Greg Williamson',
+    'sector': 5,
+    'time': 100863,
+    'distance': 874
+  },
+  {
+    'name': 'Greg Williamson',
+    'sector': 6,
+    'time': 117772,
+    'distance': 1215
+  },
+  {
+    'name': 'Greg Williamson',
+    'sector': 7,
+    'time': 148564,
+    'distance': 1629
+  },
+  {
+    'name': 'Greg Williamson',
+    'sector': 8,
+    'time': 162408,
+    'distance': 1767
+  },
+  {
+    'name': 'Greg Williamson',
+    'sector': 9,
+    'time': 183562,
+    'distance': 1939
+  },
+  {
+    'name': 'Greg Williamson',
+    'sector': 10,
+    'time': 195698,
+    'distance': 2149
+  },
+  {
+    'name': 'Greg Williamson',
+    'sector': 14,
+    'time': 223665,
+    'distance': 2488
+  },
+  {
+    'name': 'Greg Williamson',
+    'sector': 16,
+    'time': 239199,
+    'distance': 2694
+  },
+  {
+    'name': 'Greg Williamson',
+    'sector': 18,
+    'time': 244927,
+    'distance': 2838
+  },
+  {
+    'name': 'Greg Williamson',
+    'sector': 20,
+    'time': 246848,
+    'distance': 2929
+  }
+]

@@ -1,7 +1,7 @@
 import ResultsTable from '~/routes/results/components/ResultsTable';
 import Navigation, { NavigationItem } from '~/routes/results/components/Navigation';
 import RaceInfo from '~/routes/results/components/RaceInfo';
-import { redirect } from '@remix-run/router';
+import { defer, redirect } from '@remix-run/router';
 import type { LoaderFunctionArgs } from '@remix-run/node';
 import { getSupabaseServerClient } from '~/lib/supabase/supabaseClient';
 import { useLoaderData } from '@remix-run/react';
@@ -27,6 +27,7 @@ type LoaderData = {
 };
 
 export async function loader({ request }: LoaderFunctionArgs) {
+  // const dataLoader = async () => {
   const supabaseClient = getSupabaseServerClient(request);
   const response = await supabaseClient.auth.getUser();
   if (!response?.data?.user) {
@@ -46,6 +47,9 @@ export async function loader({ request }: LoaderFunctionArgs) {
       },
     ],
   };
+  // };
+
+  // return defer(dataLoader);
 }
 
 const Results: React.FC = () => {

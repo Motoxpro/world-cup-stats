@@ -21,9 +21,9 @@ export const meta: MetaFunction = () => {
 export async function loader({ request }: LoaderFunctionArgs) {
   const supabaseClient = getSupabaseServerClient(request);
   const response = await supabaseClient.auth.getUser();
-  if (response?.data?.user) {
-    return redirect('/results');
-  }
+  // if (response?.data?.user) {
+  //   return redirect('/results');
+  // }
   return null;
 }
 
