@@ -51,7 +51,7 @@ export default function AuthProvider({
     await supabase.auth.signInWithOtp({
       email,
       options: {
-        emailRedirectTo: 'https://worldcupstats.eliotjackson.com/results',
+        emailRedirectTo: 'https://worldcupstats.netlify.app/results',
       },
     });
     setIsAuthLoading(false);
