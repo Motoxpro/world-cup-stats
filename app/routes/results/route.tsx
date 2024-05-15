@@ -39,6 +39,22 @@ const Results: React.FC = () => {
   const { currentPath } = useNavigation();
   const [raceData, setRaceData] = useState([]);
   useEffect(() => {
+    const getData = async () => {
+      const { data, error } = await supabase
+        .from('Events')
+        .select(
+          'Location, RoundNumber, Year, CategoryName, RaceName, StartDate, EndDate, SplitTimes(*, Riders(*))',
+        )
+        .eq('Location', currentPath.race)
+        .eq('CategoryName', currentPath.category)
+        .eq('RaceName', currentPath.day);
+
+      if (error) {
+        console.error('Error getting user:', error.message);
+        return;
+      }
+      setRaceData(data);
+    };
     (async () => {
       const taskListener = supabase
         .channel('public:data')
@@ -46,24 +62,11 @@ const Results: React.FC = () => {
           'postgres_changes',
           { event: 'INSERT', schema: 'public', table: 'SplitTimes' },
           async (payload) => {
-            const { data, error } = await supabase
-              .from('Events')
-              .select(
-                'Location, RoundNumber, Year, CategoryName, RaceName, StartDate, EndDate, SplitTimes(*, Riders(*))',
-              )
-              .eq('Location', currentPath.race)
-              .eq('CategoryName', currentPath.category)
-              .eq('RaceName', currentPath.day);
-
-            if (error) {
-              console.error('Error getting user:', error.message);
-              return;
-            }
-            setRaceData(data);
+            getData();
           },
         )
         .subscribe();
-
+      getData();
       return () => {
         return taskListener.unsubscribe();
       };
