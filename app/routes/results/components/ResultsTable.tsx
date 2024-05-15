@@ -26,7 +26,7 @@ const ResultsTable: React.FC<ResultsTableProps> = ({ raceData }) => {
 
   const handleRowClick = (racerId: number) => {
     const newRider = analyzedData.find((r) => r.FullName === racerId);
-    setCurrentRacer(newRider);
+    // setCurrentRacer(newRider);
   };
 
   const handleResultDetailClose = () => {
@@ -60,7 +60,7 @@ const ResultsTable: React.FC<ResultsTableProps> = ({ raceData }) => {
             return (
               <TableRow
                 key={row.FullName}
-                className="hover:bg-gray-800 cursor-pointer"
+                className="hover:bg-gray-800"
                 onClick={() => handleRowClick(row.FullName)}
               >
                 <TableCell className="px-6 py-4 whitespace-nowrap font-medium text-gray-500">
