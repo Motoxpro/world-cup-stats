@@ -1,12 +1,18 @@
 import { useAuth } from '~/providers/AuthProvider';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ChartBarIcon } from '@heroicons/react/20/solid';
 import Header from '~/components/Header';
 
 const Login: React.FC = () => {
-  const { signInUser } = useAuth();
+  const { signInUser, isSignedIn } = useAuth();
   const [emailValue, setEmailValue] = useState('');
   const [didSubmit, setDidSubmit] = useState(false);
+
+  useEffect(() => {
+    if (isSignedIn) {
+      window.location.href = '/results';
+    }
+  }, [isSignedIn]);
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmailValue(e.target.value);
