@@ -90,7 +90,7 @@ const upsertRiders = async (result: RaceResult): Promise<void> => {
   // Insert riders into the 'Riders' table
   const { error } = await supabase
     .from('Riders')
-    .upsert(riders, { onConflict: 'UciRiderId' })
+    .upsert(riders, { onConflict: 'UciRiderId', ignoreDuplicates: true })
     .select();
 
   if (error) {
@@ -102,11 +102,11 @@ const upsertRiders = async (result: RaceResult): Promise<void> => {
  * Upsert split times into the 'SplitTimes' table
  */
 const upsertSplitTimes = async (result: RaceResult): Promise<void> => {
-  const { Riders, OnTrack, LastFinisher } = result;
-  const splitTimes = [...OnTrack, ...LastFinisher].map((item) => {
+  const { Riders, OnTrack, LastFinisher, Results } = result;
+  const splitTimes = [...OnTrack, ...LastFinisher, ...Results].map((item) => {
     const UciRiderId = Riders[item.RaceNr]?.UciRiderId;
     return {
-      Id: generateUniqueId(`${result.EventId}_${UciRiderId}_${item.Run}_${item.CompletedDistance}`),
+      Id: `${result.EventId}_${UciRiderId}_${item.Run}_${item.CompletedDistance}`,
       EventId: result.EventId,
       RaceNr: item.RaceNr,
       UciRiderId,

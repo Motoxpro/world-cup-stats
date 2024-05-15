@@ -13,6 +13,7 @@ import * as process from 'process';
 import { AppEnvSchema } from '~/lib/zodSchema';
 import SupabaseProvider from '~/providers/SupabaseProvider';
 import { ReactFCC } from '~/lib/types/type-utils';
+import { NavigationProvider } from '~/providers/NavigationProvider';
 import tailwindStylesheetUrl from './styles/tailwind.css';
 import AuthProvider from './providers/AuthProvider';
 import EnvProvider from './providers/EnvProvider';
@@ -63,11 +64,13 @@ export default function App() {
         <Scripts />
         <LiveReload />
         <EnvProvider env={data.env}>
-          <SupabaseProvider>
-            <AuthProvider>
-              <Outlet />
-            </AuthProvider>
-          </SupabaseProvider>
+          <NavigationProvider>
+            <SupabaseProvider>
+              <AuthProvider>
+                <Outlet />
+              </AuthProvider>
+            </SupabaseProvider>
+          </NavigationProvider>
         </EnvProvider>
       </body>
     </html>

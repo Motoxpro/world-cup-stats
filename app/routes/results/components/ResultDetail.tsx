@@ -65,6 +65,7 @@ interface ResultDetailProps {
   currentRacer: any | null | undefined;
 }
 const ResultDetail: React.FC<ResultDetailProps> = ({ isOpen, currentRacer, onClose }) => {
+
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog className="relative z-10" onClose={onClose}>

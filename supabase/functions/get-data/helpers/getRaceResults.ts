@@ -171,9 +171,7 @@ export const getRaceResults = async (): Promise<RaceResult[]> => {
       }
       const eventYear = new Date(currentEvent.startDate).getFullYear();
       return {
-        EventId: generateUniqueId(
-          `${currentEvent.location}_${currentEvent.roundNumber}_${eventYear}_${race.categoryName}_${race.raceName}`,
-        ),
+        EventId: `${currentEvent.location}_${currentEvent.roundNumber}_${eventYear}_${race.categoryName}_${race.raceName}`,
         StartDate: currentEvent.startDate,
         EndDate: currentEvent.endDate,
         Location: currentEvent.location,

@@ -1,6 +1,7 @@
 import { SupabaseClient } from '@supabase/supabase-js';
-import { createServerClient, parse, serialize } from '@supabase/ssr';
-import { Database } from './schema';
+import { createServerClient, parse, serialize, createBrowserClient } from '@supabase/ssr';
+import { AppEnv } from '~/lib/zodSchema';
+import { Database } from '../../../supabase/functions/database.types';
 
 export function getSupabaseServerClient(
   request: Request,
@@ -23,17 +24,6 @@ export function getSupabaseServerClient(
   });
 }
 
-// export function getSupabaseAdminClient(
-//   request: Request,
-//   context: LoaderFunctionArgs['context'],
-// ): SupabaseClient<Database> {
-//   if (isBrowser()) {
-//     throw new Error('getSupabaseAdminClient must be called on the server');
-//   }
-//   return createClient(context.env.SUPABASE_URL!, context.env.SUPABASE_SERVICE_ROLE!, {
-//     auth: {
-//       autoRefreshToken: false,
-//       persistSession: false,
-//     },
-//   });
-// }
+export function getSupabaseBrowserClient(env: AppEnv): SupabaseClient<Database> {
+  return createBrowserClient(env.SUPABASE_URL!, env.SUPABASE_ANON_KEY!);
+}

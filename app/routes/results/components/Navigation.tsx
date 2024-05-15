@@ -1,5 +1,6 @@
 import { useSearchParams } from '@remix-run/react';
 import React, { MouseEvent } from 'react';
+import { useNavigation } from '~/providers/NavigationProvider';
 
 export type NavigationItem = { id: string; label: string };
 export type NavigationType = 'race' | 'category' | 'day';
@@ -8,17 +9,19 @@ interface NavigationProps {
   type: NavigationType;
 }
 const Navigation: React.FC<NavigationProps> = ({ navigationItems, type }) => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const current = searchParams.get(type);
+  const { currentPath, setCurrentPath } = useNavigation();
 
   const handleClick = (item: NavigationItem, event: MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
     // Update the search params with new selected item
-    const newSearchParams = new URLSearchParams(searchParams);
-    newSearchParams.set(type, item.id);
-    setSearchParams(newSearchParams);
+    setCurrentPath((currentPath) => ({
+      ...currentPath,
+      [type]: item.id,
+    }));
   };
-console.log('Navigation.tsx: raceNavigationItems', navigationItems)
+
+  const navItem = currentPath[type]
+
   return (
     <nav className="flex overflow-x-auto border-b border-white/10 py-4">
       <ul
@@ -29,7 +32,7 @@ console.log('Navigation.tsx: raceNavigationItems', navigationItems)
           <li key={item.id}>
             <a
               href="#"
-              className={current === item.id ? 'text-sky-400' : ''}
+              className={navItem === item.id ? 'text-sky-400' : ''}
               onClick={(e) => handleClick(item, e)}
             >
               {item.label}

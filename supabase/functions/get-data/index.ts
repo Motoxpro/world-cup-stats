@@ -5,8 +5,12 @@ import * as env from '../env.ts';
 import { getRaceResults } from './helpers/getRaceResults.ts';
 // @ts-ignore
 import { upsertResults } from './helpers/upsertData.ts';
+// import { testFlow } from './testing/testFlow.ts';
 // @ts-ignore
-import { testFlow } from './testing/testFlow.ts';
+
+const sleep = (ms: number): Promise<void> => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};
 
 Deno.serve(async (req) => {
   const data = await req.json();
@@ -14,12 +18,25 @@ Deno.serve(async (req) => {
     return new Response(JSON.stringify({ message: 'Unauthorized' }), { status: 401 });
   }
 
-  // Production
-  const raceResults = await getRaceResults();
-  await upsertResults(raceResults);
+  const updateData = async (): Promise<void> => {
+    // Production
+    const raceResults = await getRaceResults();
+    await upsertResults(raceResults);
 
-  // Testing
-  await testFlow();
+    // Testing
+    // await testFlow();
+  };
+
+  const execute = async (): Promise<void> => {
+    let count = 0;
+    while (count <= 60) {
+      await updateData();
+      await sleep(1000);
+      count++;
+      console.log('Date:', new Date(), 'Count:', count);
+    }
+  };
+  await execute();
 
   return new Response(JSON.stringify({ message: 'Success' }), {
     headers: { 'Content-Type': 'application/json' },

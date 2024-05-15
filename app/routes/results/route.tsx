@@ -3,29 +3,23 @@ import Navigation, { NavigationItem } from '~/routes/results/components/Navigati
 import RaceInfo from '~/routes/results/components/RaceInfo';
 import { defer, redirect } from '@remix-run/router';
 import type { LoaderFunctionArgs } from '@remix-run/node';
-import { getSupabaseServerClient } from '~/lib/supabase/supabaseClient';
+import { getSupabaseBrowserClient, getSupabaseServerClient } from '~/lib/supabase/supabaseClient';
 import { useLoaderData } from '@remix-run/react';
 import NotVerified from '~/routes/results/NotVerified';
-import React from 'react';
-
-const categoryNavigationItems = [
-  { label: 'Women Elite', id: 'women-elite' },
-  { label: 'Men Elite', id: 'men-elite' },
-  { label: 'Junior Women', id: 'junior-women' },
-  { label: 'Junior Men', id: 'junior-men' },
-];
-const dayNavigationItems = [
-  { label: 'Timed Training', id: 'timed-training' },
-  { label: 'Qualifying', id: 'qualifying' },
-  { label: 'Semifinals', id: 'semifinals' },
-  { label: 'Finals', id: 'finals' },
-];
+import React, { useEffect, useState } from 'react';
+import { useEnv } from '~/providers/EnvProvider';
+import {
+  categoryNavigationItems,
+  dayNavigationItems,
+  raceNavigationItems,
+  useNavigation,
+} from '~/providers/NavigationProvider';
+import { analyzeRiders } from '~/routes/results/analysis/analysis';
 
 type LoaderData = {
   isVerified: boolean;
   raceNavigationItems: NavigationItem[];
 };
-
 export async function loader({ request }: LoaderFunctionArgs) {
   // const dataLoader = async () => {
   const supabaseClient = getSupabaseServerClient(request);
@@ -33,34 +27,52 @@ export async function loader({ request }: LoaderFunctionArgs) {
   if (!response?.data?.user) {
     return redirect('/login');
   }
-  // Check to see if there are no query params. If so, redirect to the closest race
-  const closestRace = 'fort-william';
-  if (!request.url.includes('?')) {
-    return redirect(`/results?race=${closestRace}&category=women-elite&day=timed-training`);
-  }
   return {
-    isVerified: response.data.user?.user_metadata.isVerified,
-    raceNavigationItems: [
-      {
-        id: 'fort-william',
-        label: 'Fort William',
-      },
-    ],
+    isVerified: response.data.user?.user_metadata.is_verified ?? false,
   };
-  // };
-
-  // return defer(dataLoader);
 }
 
 const Results: React.FC = () => {
-  const { isVerified, raceNavigationItems } = useLoaderData<LoaderData>();
+  const { isVerified } = useLoaderData<LoaderData>();
+  const env = useEnv();
+  const supabase = getSupabaseBrowserClient(env);
+  const { currentPath } = useNavigation();
+  const [raceData, setRaceData] = useState([]);
+  useEffect(() => {
+    (async () => {
+      const taskListener = supabase
+        .channel('public:data')
+        .on(
+          'postgres_changes',
+          { event: 'INSERT', schema: 'public', table: 'SplitTimes' },
+          async (payload) => {
+            const { data, error } = await supabase
+              .from('Events')
+              .select(
+                'Location, RoundNumber, Year, CategoryName, RaceName, StartDate, EndDate, SplitTimes(*, Riders(*))',
+              )
+              .eq('Location', currentPath.race)
+              .eq('CategoryName', currentPath.category)
+              .eq('RaceName', currentPath.day);
 
-  const raceData = [];
+            if (error) {
+              console.error('Error getting user:', error.message);
+              return;
+            }
+            setRaceData(data);
+          },
+        )
+        .subscribe();
 
-  // TODO: Uncomment this once the user verification is implemented
-  // if (!isVerified) {
-  //   return <NotVerified />;
-  // }
+      return () => {
+        return taskListener.unsubscribe();
+      };
+    })();
+  }, [JSON.stringify(currentPath)]);
+
+  if (!isVerified) {
+    return <NotVerified />;
+  }
 
   return (
     <main>
@@ -68,9 +80,9 @@ const Results: React.FC = () => {
         <Navigation navigationItems={raceNavigationItems} type="race" />
         <Navigation navigationItems={categoryNavigationItems} type="category" />
         <Navigation navigationItems={dayNavigationItems} type="day" />
-        <RaceInfo />
+        <RaceInfo raceData={raceData} />
       </header>
-      <ResultsTable data={raceData} />
+      <ResultsTable raceData={raceData} />
     </main>
   );
 };
