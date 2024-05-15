@@ -62,13 +62,13 @@ export default function Index() {
               </p>
             </div>
 
-            <img
-              src="https://tailwindui.com/img/component-images/dark-project-app-screenshot.png"
-              alt="App screenshot"
-              width={2432}
-              height={1442}
-              className="mt-6 rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10 sm:mt-12"
-            />
+            {/* <img */}
+            {/*  src="https://tailwindui.com/img/component-images/dark-project-app-screenshot.png" */}
+            {/*  alt="App screenshot" */}
+            {/*  width={2432} */}
+            {/*  height={1442} */}
+            {/*  className="mt-6 rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10 sm:mt-12" */}
+            {/* /> */}
 
             <div className="mx-auto mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none bg-gray-700/10">
               <div className="p-8 sm:p-10 lg:flex-auto">
@@ -103,22 +103,27 @@ export default function Index() {
               <div className="sm:-mt-2 p-2 lg:w-full lg:max-w-md lg:flex-shrink-0 lg:my-auto lg:mx-auto">
                 <div className="rounded-2xl bg-gray-50 py-10 text-center ring-1 ring-inset ring-gray-900/5 lg:flex lg:flex-col lg:justify-center lg:py-16">
                   <div className="mx-auto max-w-xs px-8">
-                    <p className="text-base font-semibold text-gray-900">
-                      Pay once, <br />
-                      get access to the entire 2024 season
-                    </p>
+                    {/*<p className="text-base font-semibold text-gray-900">*/}
+                    {/*  Pay once, <br />*/}
+                    {/*  get access to the entire 2024 season*/}
+                    {/*</p>*/}
                     <p className="mt-6 flex items-baseline justify-center gap-x-2">
-                      <span className="text-5xl font-bold tracking-tight text-gray-900">$99</span>
-                      <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600">
-                        USD
+                      {/* <span className="text-5xl font-bold tracking-tight text-gray-900">$99</span> */}
+                      <span className="text-5xl font-bold tracking-tight text-gray-900">
+                        Invite Only
                       </span>
+                      {/* <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600"> */}
+                      {/*  USD */}
+                      {/* </span> */}
                     </p>
-                    <a
-                      href="#"
-                      className="mt-10 block w-full rounded-md bg-sky-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
-                    >
-                      Get access
-                    </a>
+                    <Link to="/login">
+                      <a
+                        href="#"
+                        className="mt-10 block w-full rounded-md bg-sky-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
+                      >
+                        Get access
+                      </a>
+                    </Link>
                   </div>
                 </div>
               </div>
