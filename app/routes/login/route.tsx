@@ -22,12 +22,6 @@ const Login: React.FC = () => {
   const [emailValue, setEmailValue] = useState('');
   const [didSubmit, setDidSubmit] = useState(false);
 
-  useEffect(() => {
-    if (isSignedIn) {
-      window.location.href = '/results';
-    }
-  }, [isSignedIn]);
-
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmailValue(e.target.value);
   };
