@@ -16,7 +16,7 @@ const NotVerified: React.FC = () => {
           <b>You haven't been verified yet.</b>
         </p>
         <p className="mt-4 text-base text-white/70 sm:mt-6">
-          If you've already paid or world like to gain access
+          If you would like to gain access
         </p>
         <div>
           <a
