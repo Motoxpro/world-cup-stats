@@ -62,7 +62,6 @@ export default function Index() {
               </p>
             </div>
 
-            <Link to="/results">Results</Link>
             <img
               src="https://tailwindui.com/img/component-images/dark-project-app-screenshot.png"
               alt="App screenshot"
