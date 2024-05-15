@@ -14,7 +14,6 @@ import {
   raceNavigationItems,
   useNavigation,
 } from '~/providers/NavigationProvider';
-import { analyzeRiders } from '~/routes/results/analysis/analysis';
 
 type LoaderData = {
   isVerified: boolean;

@@ -2,9 +2,23 @@ import { useAuth } from '~/providers/AuthProvider';
 import React, { useEffect, useState } from 'react';
 import { ChartBarIcon } from '@heroicons/react/20/solid';
 import Header from '~/components/Header';
+import { NavigationItem } from '~/routes/results/components/Navigation';
+import type { LoaderFunctionArgs } from '@remix-run/node';
+import { getSupabaseServerClient } from '~/lib/supabase/supabaseClient';
+import { redirect } from '@remix-run/router';
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  // const dataLoader = async () => {
+  const supabaseClient = getSupabaseServerClient(request);
+  const response = await supabaseClient.auth.getUser();
+  if (response?.data?.user) {
+    return redirect('/results');
+  }
+  return {};
+}
 
 const Login: React.FC = () => {
-  const { signInUser, isSignedIn } = useAuth();
+  const { signInUser } = useAuth();
   const [emailValue, setEmailValue] = useState('');
   const [didSubmit, setDidSubmit] = useState(false);
 
