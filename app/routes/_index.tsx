@@ -21,9 +21,9 @@ export const meta: MetaFunction = () => {
 export async function loader({ request }: LoaderFunctionArgs) {
   const supabaseClient = getSupabaseServerClient(request);
   const response = await supabaseClient.auth.getUser();
-  // if (response?.data?.user) {
-  //   return redirect('/results');
-  // }
+  if (response?.data?.user) {
+    return redirect('/results');
+  }
   return null;
 }
 
@@ -103,10 +103,10 @@ export default function Index() {
               <div className="sm:-mt-2 p-2 lg:w-full lg:max-w-md lg:flex-shrink-0 lg:my-auto lg:mx-auto">
                 <div className="rounded-2xl bg-gray-50 py-10 text-center ring-1 ring-inset ring-gray-900/5 lg:flex lg:flex-col lg:justify-center lg:py-16">
                   <div className="mx-auto max-w-xs px-8">
-                    {/*<p className="text-base font-semibold text-gray-900">*/}
-                    {/*  Pay once, <br />*/}
-                    {/*  get access to the entire 2024 season*/}
-                    {/*</p>*/}
+                    {/* <p className="text-base font-semibold text-gray-900"> */}
+                    {/*  Pay once, <br /> */}
+                    {/*  get access to the entire 2024 season */}
+                    {/* </p> */}
                     <p className="mt-6 flex items-baseline justify-center gap-x-2">
                       {/* <span className="text-5xl font-bold tracking-tight text-gray-900">$99</span> */}
                       <span className="text-5xl font-bold tracking-tight text-gray-900">
