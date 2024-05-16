@@ -38,6 +38,9 @@ const Results: React.FC = () => {
   const { currentPath } = useNavigation();
   const [raceData, setRaceData] = useState([]);
   useEffect(() => {
+    if (!isVerified) {
+      return;
+    }
     const getData = async () => {
       const { data, error } = await supabase
         .from('Events')
@@ -70,7 +73,7 @@ const Results: React.FC = () => {
         return taskListener.unsubscribe();
       };
     })();
-  }, [JSON.stringify(currentPath)]);
+  }, [JSON.stringify(currentPath), isVerified]);
 
   if (!isVerified) {
     return <NotVerified />;
