@@ -32,6 +32,7 @@ export default function AuthProvider({
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session) => {
+      console.log('session', session);
       setIsSignedIn(!!session?.user);
       if (session) {
         setUser(session.user);

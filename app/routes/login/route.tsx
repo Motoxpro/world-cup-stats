@@ -6,21 +6,29 @@ import { NavigationItem } from '~/routes/results/components/Navigation';
 import type { LoaderFunctionArgs } from '@remix-run/node';
 import { getSupabaseServerClient } from '~/lib/supabase/supabaseClient';
 import { redirect } from '@remix-run/router';
+import { useNavigate } from '@remix-run/react';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   // const dataLoader = async () => {
   const supabaseClient = getSupabaseServerClient(request);
   const response = await supabaseClient.auth.getUser();
-  if (response?.data?.user) {
-    return redirect('/results');
+  if (!response?.data?.user) {
+    return redirect('/login');
   }
   return {};
 }
 
 const Login: React.FC = () => {
-  const { signInUser } = useAuth();
+  const { signInUser, isSignedIn } = useAuth();
   const [emailValue, setEmailValue] = useState('');
   const [didSubmit, setDidSubmit] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isSignedIn) {
+      navigate('/results');
+    }
+  }, [isSignedIn]);
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmailValue(e.target.value);
