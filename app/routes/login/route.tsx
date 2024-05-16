@@ -12,8 +12,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
   // const dataLoader = async () => {
   const supabaseClient = getSupabaseServerClient(request);
   const response = await supabaseClient.auth.getUser();
-  if (!response?.data?.user) {
-    return redirect('/login');
+  if (response?.data?.user) {
+    return redirect('/results');
   }
   return {};
 }

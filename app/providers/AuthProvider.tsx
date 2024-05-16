@@ -24,7 +24,6 @@ export default function AuthProvider({
   children: React.ReactNode;
 }): React.ReactElement {
   const { supabase } = useSupabase();
-  const [isSignedIn, setIsSignedIn] = useState(false);
   const [isAuthLoading, setIsAuthLoading] = useState(false);
   const [user, setUser] = useState<User | null>(null);
 
@@ -32,8 +31,6 @@ export default function AuthProvider({
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session) => {
-      console.log('session', session);
-      setIsSignedIn(!!session?.user);
       if (session) {
         setUser(session.user);
       }
@@ -67,7 +64,7 @@ export default function AuthProvider({
   };
 
   const auth = {
-    isSignedIn,
+    isSignedIn: !!user,
     signInUser: signInUserWithMagicLink,
     signOutUser,
     user,
