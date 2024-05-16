@@ -41,8 +41,8 @@ const ResultsTable: React.FC<ResultsTableProps> = ({ raceData }) => {
         currentRacer={currentRacer}
         onClose={handleResultDetailClose}
       />
-      <h2 className="px-4 text-base font-semibold leading-7 text-white sm:px-6 lg:px-8">
-        Latest results
+      <h2 className="px-2 text-base font-semibold leading-7 text-white sm:px-4 lg:px-6">
+        Live results
       </h2>
       <Table>
         <TableHead>
@@ -63,10 +63,10 @@ const ResultsTable: React.FC<ResultsTableProps> = ({ raceData }) => {
                 className="hover:bg-gray-800"
                 onClick={() => handleRowClick(row.FullName)}
               >
-                <TableCell className="px-6 py-4 whitespace-nowrap font-medium text-gray-500">
+                <TableCell className="px-6 py-4 whitespace-nowrap font-medium text-gray-400">
                   {row.FullName}
                 </TableCell>
-                <TableCell className="px-6 py-4 whitespace-nowrap text-gray-500">
+                <TableCell className="px-6 py-4 whitespace-nowrap text-gray-400">
                   {row.FinishTime ? formatTime(row.FinishTime) : 'N/A'}
                 </TableCell>
                 {riderSplits.map(([split, analysis]) =>
