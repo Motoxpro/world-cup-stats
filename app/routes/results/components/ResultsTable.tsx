@@ -71,7 +71,7 @@ const ResultsTable: React.FC<ResultsTableProps> = ({ raceData }) => {
                 </TableCell>
                 {riderSplits.map(([split, analysis]) =>
                   (analysis.SplitTime ? (
-                    <TableCell key={split} className="px-6 py-4 whitespace-nowrap  text-gray-500">
+                    <TableCell key={split} className="px-6 py-4 whitespace-nowrap  text-gray-400">
                       <div className="flex justify-between">
                         <div className="">Split:</div>
                         <div className="ml-2 font-bold">{formatTime(analysis.SplitTime)}</div>

@@ -90,7 +90,7 @@ const upsertRiders = async (result: RaceResult): Promise<void> => {
   // Insert riders into the 'Riders' table
   const { error } = await supabase
     .from('Riders')
-    .upsert(riders, { onConflict: 'UciRiderId', ignoreDuplicates: true })
+    .upsert(riders, { onConflict: 'UciRiderId' })
     .select();
 
   if (error) {
@@ -126,7 +126,6 @@ const upsertSplitTimes = async (result: RaceResult): Promise<void> => {
 
   const { error } = await supabase.from('SplitTimes').upsert(splitTimes, {
     onConflict: 'Id',
-    ignoreDuplicates: true,
   });
 
   if (error) {
