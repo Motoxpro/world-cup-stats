@@ -41,9 +41,6 @@ const ResultsTable: React.FC<ResultsTableProps> = ({ raceData }) => {
         currentRacer={currentRacer}
         onClose={handleResultDetailClose}
       />
-      <h2 className="px-2 text-base font-semibold leading-7 text-white sm:px-4 lg:px-6">
-        Live results
-      </h2>
       <Table>
         <TableHead>
           <TableRow>

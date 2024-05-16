@@ -16,7 +16,7 @@ const RaceInfo: React.FC = ({ raceData }) => {
               <div className="h-2 w-2 rounded-full bg-current" />
             </div>
             <h1 className="flex gap-x-3 text-base leading-7">
-              <span className="font-semibold text-white">Live</span>
+              <span className="font-semibold text-white">LIVE</span>
             </h1>
           </div>
         )}
