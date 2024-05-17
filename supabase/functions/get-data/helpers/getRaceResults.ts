@@ -88,7 +88,7 @@ export const all2024Events = [
   {
     startDate: '2024-05-16T22:00:00Z',
     endDate: '2024-05-19T21:59:00Z',
-    dateKey: '20240517_mtb',
+    dateKey: '20240518_dhi',
     location: 'Bielsko - Biała, Poland',
     roundNumber: 2,
   },
