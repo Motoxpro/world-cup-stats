@@ -24,7 +24,7 @@ export const analyzeRiders = (data: RaceData[]): (Set<string> | RiderAnalysis[])
       return;
     }
     race.SplitTimes.forEach((split) => {
-      const riderId = split.Riders.UciRiderId;
+      const riderId = `${split.Riders.UciRiderId} ${split.Run}`;
       if (!riderMap[riderId]) {
         riderMap[riderId] = {
           FullName: split.Riders.FullName,
@@ -56,7 +56,7 @@ export const analyzeRiders = (data: RaceData[]): (Set<string> | RiderAnalysis[])
 
       // If the rider is in the result, update the finish time
       // console.log(rider.FinishTime, split.InResult, split.RaceTime)
-      if (split.InResult) {
+      if (split.Status === 'Finished') {
         rider.FinishTime = split.RaceTime;
       }
     });
@@ -79,7 +79,8 @@ export const analyzeRiders = (data: RaceData[]): (Set<string> | RiderAnalysis[])
     // Calculate SplitPosition and TimeLost
     const fastestTime = splits[0].RaceTime;
     splits.forEach((split, index) => {
-      const riderAnalysis = riderMap[split.Riders.UciRiderId];
+      const riderId = `${split.Riders.UciRiderId} ${split.Run}`;
+      const riderAnalysis = riderMap[riderId];
       const analysis = riderAnalysis.Splits[lastPointName];
       analysis.SplitPosition = index + 1;
       analysis.TimeLost = split.RaceTime - fastestTime;
@@ -87,7 +88,7 @@ export const analyzeRiders = (data: RaceData[]): (Set<string> | RiderAnalysis[])
 
     // Calculate SectorTimes and SectorPositions
     splits.forEach((split) => {
-      const riderId = split.Riders.UciRiderId;
+      const riderId = `${split.Riders.UciRiderId} ${split.Run}`;
       const riderAnalysis = riderMap[riderId];
       const analysis = riderAnalysis.Splits[lastPointName];
       const previousPoint = sortedSplitPointNames[index - 1];
@@ -101,7 +102,7 @@ export const analyzeRiders = (data: RaceData[]): (Set<string> | RiderAnalysis[])
 
       // Collect sector times for ranking
       splitPoints[lastPointName].forEach((s) => {
-        const rId = s.Riders.UciRiderId;
+        const rId = `${s.Riders.UciRiderId} ${s.Run}`;
         const rAnalysis = riderMap[rId];
         const rSplit = rAnalysis.Splits[lastPointName];
         if (previousPoint && rAnalysis.Splits[previousPoint]) {
@@ -114,16 +115,17 @@ export const analyzeRiders = (data: RaceData[]): (Set<string> | RiderAnalysis[])
 
       // Sort by SectorTime to determine positions
       const sectorTimes = splitPoints[lastPointName].map((s) => {
+        const rId = `${s.Riders.UciRiderId} ${s.Run}`;
         return (
           s.RaceTime -
-          (riderMap[s.Riders.UciRiderId].Splits[sortedSplitPointNames[index - 1]]
-            ? riderMap[s.Riders.UciRiderId].Splits[sortedSplitPointNames[index - 1]].SplitTime
+          (riderMap[rId].Splits[sortedSplitPointNames[index - 1]]
+            ? riderMap[rId].Splits[sortedSplitPointNames[index - 1]].SplitTime
             : 0)
         );
       });
       sectorTimes.sort((a, b) => a - b);
       splits.forEach((s) => {
-        const rId = s.Riders.UciRiderId;
+        const rId = `${s.Riders.UciRiderId} ${s.Run}`;
         const rAnalysis = riderMap[rId];
         const rSplit = rAnalysis.Splits[lastPointName];
         rSplit.SectorPosition = sectorTimes.indexOf(rSplit.SectorTime) + 1;
