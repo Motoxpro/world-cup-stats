@@ -24,7 +24,7 @@ export const analyzeRiders = (data: RaceData[]): (Set<string> | RiderAnalysis[])
       return;
     }
     race.SplitTimes.forEach((split) => {
-      const riderId = split.Riders.UciRiderId + split.Run;
+      const riderId = `${split.Riders.UciRiderId} ${split.Run}`;
       if (!riderMap[riderId]) {
         riderMap[riderId] = {
           FullName: split.Riders.FullName,
