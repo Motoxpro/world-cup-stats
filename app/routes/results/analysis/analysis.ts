@@ -56,7 +56,7 @@ export const analyzeRiders = (data: RaceData[]): (Set<string> | RiderAnalysis[])
 
       // If the rider is in the result, update the finish time
       // console.log(rider.FinishTime, split.InResult, split.RaceTime)
-      if (split.InResult) {
+      if (split.Status === 'Finished') {
         rider.FinishTime = split.RaceTime;
       }
     });
