@@ -88,10 +88,7 @@ const upsertRiders = async (result: RaceResult): Promise<void> => {
   }));
 
   // Insert riders into the 'Riders' table
-  const { error } = await supabase
-    .from('Riders')
-    .upsert(riders, { onConflict: 'UciRiderId' })
-    .select();
+  const { error } = await supabase.from('Riders').upsert(riders, { onConflict: 'UciRiderId' });
 
   if (error) {
     throw new Error(`Error inserting data: ${error.message}`);
@@ -102,8 +99,8 @@ const upsertRiders = async (result: RaceResult): Promise<void> => {
  * Upsert split times into the 'SplitTimes' table
  */
 const upsertSplitTimes = async (result: RaceResult): Promise<void> => {
-  const { Riders, OnTrack, LastFinisher, Results } = result;
-  const splitTimes = [...OnTrack, ...LastFinisher, ...Results].map((item) => {
+  const { Riders, OnTrack } = result;
+  const splitTimes = [...OnTrack].map((item) => {
     const UciRiderId = Riders[item.RaceNr]?.UciRiderId;
     return {
       Id: `${result.EventId}_${UciRiderId}_${item.Run}_${item.CompletedDistance}`,
@@ -123,8 +120,16 @@ const upsertSplitTimes = async (result: RaceResult): Promise<void> => {
       ExpectedStartTime: item.ExpectedStartTime,
     };
   });
+  // Remove duplicates from splitTimes
+  const uniqueSplitTimes = splitTimes.reduce((acc, current) => {
+    const x = acc.find((item) => item.Id === current.Id);
+    if (!x) {
+      return acc.concat([current]);
+    }
+    return acc;
+  }, []);
 
-  const { error } = await supabase.from('SplitTimes').upsert(splitTimes, {
+  const { error } = await supabase.from('SplitTimes').upsert(uniqueSplitTimes, {
     onConflict: 'Id',
   });
 
