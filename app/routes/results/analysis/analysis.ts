@@ -119,7 +119,7 @@ export const analyzeRiders = (data: RaceData[]): (Set<string> | RiderAnalysis[])
         return (
           s.RaceTime -
           (riderMap[rId].Splits[sortedSplitPointNames[index - 1]]
-            ? riderMap[s.Riders.UciRiderId].Splits[sortedSplitPointNames[index - 1]].SplitTime
+            ? riderMap[rId].Splits[sortedSplitPointNames[index - 1]].SplitTime
             : 0)
         );
       });
