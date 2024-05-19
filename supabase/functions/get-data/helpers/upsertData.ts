@@ -100,7 +100,7 @@ const upsertRiders = async (result: RaceResult): Promise<void> => {
  */
 const upsertSplitTimes = async (result: RaceResult): Promise<void> => {
   const { Riders, OnTrack } = result;
-  const splitTimes = [...OnTrack].map((item) => {
+  const splitTimes = OnTrack.map((item) => {
     const UciRiderId = Riders[item.RaceNr]?.UciRiderId;
     return {
       Id: `${result.EventId}_${UciRiderId}_${item.Run}_${item.CompletedDistance}`,
@@ -129,12 +129,40 @@ const upsertSplitTimes = async (result: RaceResult): Promise<void> => {
     return acc;
   }, []);
 
-  const { error } = await supabase.from('SplitTimes').upsert(uniqueSplitTimes, {
-    onConflict: 'Id',
+  // Get all unique IDs
+  const ids = uniqueSplitTimes.map((st) => st.Id);
+
+  // Batch query to get existing RaceTimes
+  const { data: existingData, error: queryError } = await supabase
+    .from('SplitTimes')
+    .select('Id, RaceTime')
+    .in('Id', ids);
+
+  if (queryError) {
+    throw new Error(`Error querying data: ${queryError.message}`);
+  }
+
+  const existingRaceTimes = existingData.reduce((acc, current) => {
+    acc[current.Id] = current.RaceTime;
+    return acc;
+  }, {});
+
+  // Filter records to be upserted
+  const recordsToUpsert = uniqueSplitTimes.filter((st) => {
+    const existingRaceTime = existingRaceTimes[st.Id];
+    return (
+      existingRaceTime === undefined || existingRaceTime === null || st.RaceTime < existingRaceTime
+    );
   });
 
-  if (error) {
-    throw new Error(`Error inserting data: ${error.message}`);
+  if (recordsToUpsert.length > 0) {
+    const { error: upsertError } = await supabase
+      .from('SplitTimes')
+      .upsert(recordsToUpsert, { onConflict: 'Id' });
+
+    if (upsertError) {
+      throw new Error(`Error upserting data: ${upsertError.message}`);
+    }
   }
 };
 
